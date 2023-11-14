@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "263537612753",
+    "firebase_url": "https://tomatify-b02d2-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "tomatify-b02d2",
+    "storage_bucket": "tomatify-b02d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263537612753:android:e17d8559be83c3d54f72f0",
+        "android_client_info": {
+          "package_name": "com.company.tomatify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIY5iiaWO08YrhxFoxkQHYUOUKrl7kZRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263537612753:android:ff16ddcf74fc8dd34f72f0",
+        "android_client_info": {
+          "package_name": "com.example.tomato"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIY5iiaWO08YrhxFoxkQHYUOUKrl7kZRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
