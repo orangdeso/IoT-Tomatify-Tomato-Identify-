@@ -1,7 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:tomato/view/home.dart';
+import 'package:tomato/view/navbar_view.dart';
 
 class SplassScreen extends StatefulWidget {
   const SplassScreen({super.key});
@@ -19,7 +18,7 @@ class _SplassScreenState extends State<SplassScreen> {
         context,
         MaterialPageRoute(
           builder: (context) {
-            return const Home();
+            return NavbarView();
           },
         ),
       );
