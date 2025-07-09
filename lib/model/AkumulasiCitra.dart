@@ -35,6 +35,7 @@ class AkumulasiCitra {
       Uri url = Uri.parse(ApiHelper.url + 'akumulasi_matang.php');
       var response = await http.get(url);
       var body = json.decode(response.body);
+      print(body);
       return AkumulasiCitra.fromJson(body);
     } catch (e) {
       throw Exception('$e');
@@ -46,6 +47,7 @@ class AkumulasiCitra {
       Uri url = Uri.parse(ApiHelper.url + 'akumulasi_mentah.php');
       var response = await http.get(url);
       var body = json.decode(response.body);
+      print(body);
       return AkumulasiCitra.fromJson(body);
     } catch (e) {
       throw Exception('$e');

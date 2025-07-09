@@ -35,6 +35,7 @@ class AkumulasiBerat {
       Uri url = Uri.parse(ApiHelper.url + 'akumulasi_kecil.php');
       var response = await http.get(url);
       var body = json.decode(response.body);
+      print(body);
       return AkumulasiBerat.fromJson(body);
     } catch (e) {
       throw Exception('$e');

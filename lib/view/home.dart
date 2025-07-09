@@ -1,17 +1,10 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:tomato/model/AkumulasiBerat.dart';
 import 'package:tomato/model/AkumulasiCitra.dart';
-import 'package:tomato/view/RiwayatBerat.dart';
-// import 'package:tomato/view/detail_riwayat.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
-// import 'package:tomato/helpers/ApiHelper.dart';
-// import 'dart:convert';
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:firebase_database/firebase_database.dart';
-//import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:tomato/view/navbar_view.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -26,11 +19,10 @@ class _HomeState extends State<Home> {
   // String realTimeValue = '0';
 
   String tanggalOtomatis = DateFormat('dd MMMM yyyy').format(DateTime.now());
-  String tanggalOtomatis2 = DateFormat('dd MMM yyyy').format(DateTime.now());
 
   // Http
-  // List<Data> ListBerat = [];
-  // List<Data> ListKecil = [];
+  // List<AkumulasiBerat> ListBerat = [];
+  // List<AkumulasiBerat> ListKecil = [];
 
   // void tampilBerat() async {
   //   AkumulasiBerat.tampilBesar().then((value) {
@@ -45,16 +37,52 @@ class _HomeState extends State<Home> {
   //   });
   // }
 
+  late Timer _timer;
+  // List<dynamic> _dataKecil = [];
+
+  // Future<void> kecilRefresh({String? idUser}) async {
+  //   final response = await http.get(
+  //       Uri.parse(ApiHelper.url + "akumulasi_keil.php"),
+  //       body: json.decode(response.body);
+
+  //   if (response.statusCode == 200) {
+  //     final jsonData = json.decode(response.body);
+
+  //     setState(() {
+  //       _dataKecil = jsonData['data'];
+  //     });
+  //   } else {
+  //     throw Exception('Failed to load data');
+  //   }
+  // }
+
   @override
   void initState() {
     //setGreeting();
     // Firebase.initializeApp();
     // tampilBerat();
-    AkumulasiBerat.tampilBesar();
-    AkumulasiBerat.tampilKecil();
-    AkumulasiCitra.tampilMatang();
-    AkumulasiCitra.tampilMentah();
+    setState(() {
+      _timer = Timer(Duration(seconds: 5), () {
+        AkumulasiBerat.tampilKecil();
+        AkumulasiBerat.tampilBesar();
+        AkumulasiCitra.tampilMatang();
+        AkumulasiCitra.tampilMentah();
+        Navigator.of(context, rootNavigator: true).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return const NavbarView();
+            },
+          ),
+        );
+      });
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -129,7 +157,7 @@ class _HomeState extends State<Home> {
                   child: Column(
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
                             decoration: BoxDecoration(
@@ -168,6 +196,52 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                           ),
+                          // Material(
+                          //   color: Colors.transparent,
+                          //   child: InkWell(
+                          //     onTap: () {
+                          //       print("Sudah diklik");
+                          //       Navigator.push(
+                          //         context,
+                          //         MaterialPageRoute(
+                          //           builder: (context) {
+                          //             return MonitoringRealtime();
+                          //           },
+                          //         ),
+                          //       );
+                          //     },
+                          //     borderRadius: BorderRadius.circular(10),
+                          //     child: Padding(
+                          //       padding: EdgeInsets.all(10),
+                          //       child: Row(
+                          //         mainAxisAlignment: MainAxisAlignment.start,
+                          //         crossAxisAlignment: CrossAxisAlignment.center,
+                          //         children: [
+                          //           Text(
+                          //             "Lihat Monitoring",
+                          //             maxLines: 2,
+                          //             overflow: TextOverflow.ellipsis,
+                          //             textAlign: TextAlign.left,
+                          //             style: TextStyle(
+                          //               fontFamily: 'Poppins',
+                          //               fontSize: 14,
+                          //               fontWeight: FontWeight.w500,
+                          //               color:
+                          //                   Color.fromARGB(255, 98, 150, 130),
+                          //             ),
+                          //           ),
+                          //           SizedBox(
+                          //             width: 10,
+                          //           ),
+                          //           Icon(
+                          //             Icons.restart_alt_rounded,
+                          //             color: Color.fromARGB(255, 98, 150, 130),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                       SizedBox(
@@ -578,46 +652,47 @@ class _HomeState extends State<Home> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 26,
-                      ),
-                      Align(
-                        alignment: FractionalOffset.topLeft,
-                        child: Text(
-                          "Riwayat Penyotiran Berat",
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey.shade800,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      RiwayatBerat(),
-                      SizedBox(
-                        height: 26,
-                      ),
-                      Align(
-                        alignment: FractionalOffset.topLeft,
-                        child: Text(
-                          "Riwayat Penyotiran Warna",
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey.shade800,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 6,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
+                      // SizedBox(
+                      //   height: 36,
+                      // ),
+                      // Align(
+                      //   alignment: FractionalOffset.topLeft,
+                      //   child: Text(
+                      //     "Riwayat Penyotiran Berat",
+                      //     style: TextStyle(
+                      //       fontFamily: 'Poppins',
+                      //       fontSize: 18,
+                      //       fontWeight: FontWeight.w600,
+                      //       color: Colors.grey.shade800,
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 10,
+                      // ),
+                      // RiwayatBerat(),
+                      // SizedBox(
+                      //   height: 36,
+                      // ),
+                      // Align(
+                      //   alignment: FractionalOffset.topLeft,
+                      //   child: Text(
+                      //     "Riwayat Penyotiran Kematangan",
+                      //     style: TextStyle(
+                      //       fontFamily: 'Poppins',
+                      //       fontSize: 18,
+                      //       fontWeight: FontWeight.w600,
+                      //       color: Colors.grey.shade800,
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 10,
+                      // ),
+                      // RiwayatCitra(),
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
                     ],
                   ),
                 ),

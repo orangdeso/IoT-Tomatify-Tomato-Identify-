@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tomato/model/RiwayatModelBerat.dart';
-import 'package:tomato/view/detail_riwayat.dart';
+import 'package:tomato/view/detail_riwayat_berat.dart';
 
 class RiwayatBerat extends StatefulWidget {
   const RiwayatBerat({
@@ -47,7 +47,7 @@ class _RiwayatBeratState extends State<RiwayatBerat> {
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.shade200, // Warna bayangan
-                  offset: Offset(0.0, 10.0), // Posisi bayangan (X, Y)
+                  offset: Offset(0.0, 2.0), // Posisi bayangan (X, Y)
                   blurRadius: 5.0, // Radius blur bayangan
                   spreadRadius: 2.0, // Radius penyebaran bayangan
                 ),
@@ -61,7 +61,7 @@ class _RiwayatBeratState extends State<RiwayatBerat> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return DetailRiwayat(
+                        return DetailRiwayatBerat(
                           tanggal: _dataBerat1[index].tanggal.toString(),
                         );
                       },
@@ -73,7 +73,13 @@ class _RiwayatBeratState extends State<RiwayatBerat> {
                 child: Padding(
                   padding: EdgeInsets.all(10.0),
                   child: ListTile(
-                    leading: Text("${_dataBerat1[index].tanggal}"),
+                    leading: Text(
+                      "${_dataBerat1[index].tanggal}",
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        color: Colors.grey.shade700,
+                      ),
+                    ),
                     title: Padding(
                       padding: EdgeInsets.only(left: 12),
                       child: Text(
@@ -83,20 +89,28 @@ class _RiwayatBeratState extends State<RiwayatBerat> {
                         //     .value
                         //     .toString(),
                         style: TextStyle(
-                          fontSize: 16,
+                          fontFamily: 'Poppins',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey.shade800,
                         ),
                       ),
                     ),
                     subtitle: Padding(
-                      padding: EdgeInsets.only(left: 12, top: 5),
+                      padding: EdgeInsets.only(left: 12, top: 8),
                       child: Text(
-                        "Klik untuk detail",
+                        "Total berat : ${_dataBerat1[index].totalBerat}",
                         style: TextStyle(
-                            //fontSize: 16,
-                            ),
+                          fontFamily: 'Poppins',
+                        ),
                       ),
                     ),
-                    trailing: Text("${_dataBerat1[index].waktu}"),
+                    trailing: Text(
+                      "${_dataBerat1[index].waktu}",
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
                   ),
                 ),
               ),

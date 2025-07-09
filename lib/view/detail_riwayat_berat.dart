@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:tomato/model/RiwayatModelBerat.dart';
 
-class DetailRiwayat extends StatefulWidget {
+class DetailRiwayatBerat extends StatefulWidget {
   final String tanggal;
 
-  DetailRiwayat({
+  DetailRiwayatBerat({
     Key? key,
     required this.tanggal,
   }) : super(key: key);
 
   @override
-  State<DetailRiwayat> createState() => _DetailRiwayatState();
+  State<DetailRiwayatBerat> createState() => _DetailRiwayatBeratState();
 }
 
-class _DetailRiwayatState extends State<DetailRiwayat> {
+class _DetailRiwayatBeratState extends State<DetailRiwayatBerat> {
   late String valueTanggal;
   List<Data> listData = [];
 
